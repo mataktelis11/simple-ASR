@@ -1,7 +1,7 @@
 
 clc
 clear
-close all
+%close all
 
 % Simple Isolated Word Detector script
 
@@ -34,7 +34,7 @@ close all
 
 %%%% USER DEFINED PARAMETERS %%%%
 
-audioFilename = '3rec.wav';
+audioFilename = 'samples/3rec.wav';
 
 Fs=8000;                    % Sampling Frequency after downsample
 nfft=1024;                  % fft length used in spectral calculations
