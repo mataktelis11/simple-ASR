@@ -2,7 +2,7 @@
 
 clc
 clear
-close all
+%close all
 
 %%%% USER DEFINED PARAMETERS %%%%
 
@@ -12,7 +12,7 @@ w = 30;         % Frame Duration in ms
 h = 10;         % Frame Shift in ms
 Fs = 8000;      % Sampling Frequency after downsample
 
-visualize = 0;  % 0 : do not display diagrams
+visualize = 1;  % 0 : do not display diagrams
                 % 1 : display diagrams (slower)
 
 playWords = 1;  % 0 : do not play each detected word with 1s delay
@@ -32,6 +32,18 @@ speech=speech/max(speechMax,-speechMin);
 
 % resample the signal
 x=resample(speech,Fs,FsOrig);
+
+
+% filter the resampled signal with a FIR bandpass filter
+
+% stopband:         0-100 Hz
+% transition band:  100-200 Hz
+% pass-band:        200-4000 Hz
+
+filt = firpm(301,[0 100 200 Fs/2]/(Fs/2),[0 0 1 1]);
+
+%x=filter(filt,1,x);
+
 
 % find words inside the signal
 isolatedWords = isolateWords(x,Fs,w,h,10,35,visualize);
