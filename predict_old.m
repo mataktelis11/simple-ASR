@@ -41,7 +41,7 @@ loadedModel = load('trainedModel.mat');
 % Access the loaded SVM model
 svmModel = loadedModel.svmModel;
 
-prediction = predict(svmModel, featureVector)
+prediction = predict(SVMmodel, featureVector)
 
 
 

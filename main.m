@@ -1,12 +1,12 @@
 
 
-clc
+%clc
 %clear
 close all
 
 %%%% USER DEFINED PARAMETERS %%%%
 
-audioFilename = 'samples/1A.waV';
+audioFilename = 'samples/test2.wav';
 
 visualize = 0;  % 0 : do not display diagrams
                 % 1 : display diagrams (slower)
@@ -14,7 +14,11 @@ visualize = 0;  % 0 : do not display diagrams
 playWords = 1;  % 0 : do not play each detected word with 1s delay
                 % 1 : play detected words               
 
-useFIRfilter = 1;               
+useFIRfilter = 1;  
+
+if exist('SVMClassifier','var') == 0
+    load trainedModels\thos.mat;
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

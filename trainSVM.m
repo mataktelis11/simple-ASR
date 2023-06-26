@@ -1,5 +1,5 @@
 
-load augmentedDatasetLabels.mat
+load augmentedDataset\augmentedDatasetLabels.mat
 
 X = cell2mat(vectors');
 Y = labels;

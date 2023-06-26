@@ -3,7 +3,7 @@ clear
 close all
 
 
-load augmentedDataset.mat
+load augmentedDataset\augmentedDataset.mat
 
 
 sig = zeros(1,8000);
