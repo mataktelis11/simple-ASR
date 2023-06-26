@@ -92,10 +92,10 @@ if(visualize==1)
 end
 
             
-eavg=mean(Energy(1:trainingFrames))
-esig=std(Energy(1:trainingFrames))
-zcavg=mean(ZeroCrossRate(1:trainingFrames))
-zcsig=std(ZeroCrossRate(1:trainingFrames))
+eavg=mean(Energy(1:trainingFrames));
+esig=std(Energy(1:trainingFrames));
+zcavg=mean(ZeroCrossRate(1:trainingFrames));
+zcsig=std(ZeroCrossRate(1:trainingFrames));
 
         
 IZCT = max(IF,zcavg+3*zcsig);  % Variable Zero Crossing Threshold
@@ -141,8 +141,10 @@ if(visualize==1)
     xlabel('Frame')
     ylabel('Energy')
     title(['Logarimthmic Energy of Each Frame'])
-    xline(foregroundFrames, 'g');
-    xline(backgroundFranes, 'b');
+    %xline(foregroundFrames, 'g');
+    %xline(backgroundFranes, 'b');
+    stem(foregroundFrames,Energy(foregroundFrames),'g')
+    stem(backgroundFranes,Energy(backgroundFranes),'b')
     grid on
     
     subplot(212)
@@ -152,8 +154,10 @@ if(visualize==1)
     xlabel('Frame')
     ylabel('Zerocrossing Rate')
     title(['Zerocrossing Rate of Each Frame'])
-    xline(foregroundFrames, 'g');
-    xline(backgroundFranes, 'b');
+%     xline(foregroundFrames, 'g');
+%     xline(backgroundFranes, 'b');
+    stem(foregroundFrames,ZeroCrossRate(foregroundFrames),'g')
+    stem(backgroundFranes,ZeroCrossRate(backgroundFranes),'b')
     grid on
 
     backgroundFranes = find(classification == 1);
@@ -168,8 +172,10 @@ if(visualize==1)
     xlabel('Frame')
     ylabel('Energy')
     title(['Logarimthmic Energy of Each Frame'])
-    xline(foregroundFrames, 'g');
-    xline(backgroundFranes, 'b');
+%     xline(foregroundFrames, 'g');
+%     xline(backgroundFranes, 'b');
+    stem(foregroundFrames,Energy(foregroundFrames),'g')
+    stem(backgroundFranes,Energy(backgroundFranes),'b')
     grid on
     
     subplot(212)
@@ -179,8 +185,10 @@ if(visualize==1)
     xlabel('Frame')
     ylabel('Zerocrossing Rate')
     title(['Zerocrossing Rate of Each Frame'])
-    xline(foregroundFrames, 'g');
-    xline(backgroundFranes, 'b');
+%     xline(foregroundFrames, 'g');
+%     xline(backgroundFranes, 'b');
+    stem(foregroundFrames,ZeroCrossRate(foregroundFrames),'g')
+    stem(backgroundFranes,ZeroCrossRate(backgroundFranes),'b')
     grid on
 
 end
@@ -234,10 +242,21 @@ isolatedWords = {};
 
 for k=1:length(isolatedWordsIndexes)
     word = isolatedWordsIndexes{k};
+    
+    
 
     firstSample = word(1)*winstep;
     lastSample = word(end)*winstep+winlength-1;
-
+    
+    if(lastSample>length(x))
+        lastSample = length(x);
+    end
+    
+    % ignore very short words
+    if(lastSample-firstSample < 500)
+        continue
+    end
+    
     if(visualize==1)
         xline(firstSample, 'g');
         xline(lastSample, 'r');

@@ -1,3 +1,5 @@
 *.asv
 audioData2
+augmentedDataset
+trainedModels
 
