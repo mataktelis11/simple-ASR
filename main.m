@@ -6,7 +6,7 @@ close all
 
 %%%% USER DEFINED PARAMETERS %%%%
 
-audioFilename = 'samples/test2.wav';
+audioFilename = 'samples/1A.waV';
 
 visualize = 0;  % 0 : do not display diagrams
                 % 1 : display diagrams (slower)
@@ -93,7 +93,7 @@ for k=1:length(isolatedWords)
    coeffs = abs(coeffs);
    coeffs = reshape(coeffs.',1,[]);
    
-   prediction = predict(SVMClassifier, coeffs)
+   prediction = predict(tinyModel, coeffs)
    
 end
 

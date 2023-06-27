@@ -27,5 +27,5 @@ pause
 % -------------------------------------------------------------------------
 SVMClassifier = fitcecoc(X_train, Y_train,'Options',options);
                      
-                     
-                     
+% store only usefull parts with                    
+tinyModel = SVMClassifier.compact;
