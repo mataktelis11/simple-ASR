@@ -6,9 +6,9 @@ close all
 
 %%%% USER DEFINED PARAMETERS %%%%
 
-audioFilename = 'samples/1A.waV';
+audioFilename = 'samples/3rec.wav';
 
-visualize = 0;  % 0 : do not display diagrams
+visualize = 1;  % 0 : do not display diagrams
                 % 1 : display diagrams (slower)
 
 playWords = 1;  % 0 : do not play each detected word with 1s delay

@@ -1,9 +1,17 @@
 function [fundamentalFreq] = pitchTracking(sig,Fs,visualize,title)
-%PITCHTRACKING Summary of this function goes here
-%   Detailed explanation goes here
-
-% fundamental frequency will be in the interval:
-% [90,600] (Hz)
+%PITCHTRACKING Calcuclate the fundamental frequency (pitch) in a speech
+%signal
+%   This function calculates the fundamental frequency (pitch) in an input
+%   speech signal by using the autocorrelation (unbiased and normalized).
+%   Also it is assumed that fundamental frequency will be in the interval:
+%   [90,600] (Hz).
+%
+%
+%
+%
+%
+%
+%
 
 k1 = floor(Fs/600);
 k2 = floor(Fs/90);

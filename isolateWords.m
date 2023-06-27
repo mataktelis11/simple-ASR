@@ -1,15 +1,40 @@
 function [isolatedWords] = isolateWords(x,Fs,w,h,trainingFrames,IF,visualize)
-%ISOLATEWORDS Summary of this function goes here
-%   Detailed explanation goes here
+%ISOLATEWORDS Return the words contained in a speech signal
+%
+%   This function reads an audio file that contains human speech.
+%   The audio file is analyzed and all the words are isolated and
+%   extracted. It works by classifying each frame as a background frame
+%   (class 1) or a foreground frame (class 2).
+%
+%   The classification relies on the Energy and Zerocrossing rate of the
+%   input signal. A hamming window is used for the short term processing.
+%
 %   Args:
 %       x:  input speech signal (1xN dimentions)
 %       Fs: sample rate of speech signal
 %       w:  moving window length in ms
 %       h:  hop size in ms
-%       trainingFrames: 
+%       trainingFrames: number of frames used for the calvulation of mean
+%           and stv of Energy and zerocrossing rate
 %       IF: Constant Zero Crossing Threshold 
 %       visualize: integer (0 or 1)
+%
+%   Returns:
+%       isolatedWords: cell array containing the arrays cooresponding to
+%           the words of the input signal.
+%
+%
+%
+% Based on exercise 10.4 of book:
+% Theory and Applications of Digital Speech Processing,
+% L.R. Rabiner, R.W. Schafer
+% ISBN:0136034284
+%
+% Aristotelis Matakias - Summer 2023
+% Course: Speech and Audio Processing
+% 
 
+% Short-Term processing
 
 winlength=w*Fs/1000;       % moving window length (in samples).
 winstep=h*Fs/1000;         % hop size in samples
@@ -29,13 +54,10 @@ N = length(x); % new signal length
 
 numOfFrames = (N - winlength)/winstep + 1;
 
-
-
+% calculate 
 
 Energy = zeros(1,numOfFrames,'double');
 ZeroCrossRate = zeros(1,numOfFrames,'double');
-
-
 
 
 for m=0:numOfFrames-1
@@ -43,11 +65,9 @@ for m=0:numOfFrames-1
     b = m*winstep+winlength;
     frame = x(m*winstep+1:m*winstep+winlength);
 
-
     w = hamming(winlength);
     
     Energy(m+1) = 10*log10(sum((frame.*w).^2));
-
     
     absValues = abs(diff(sign(frame)));
     absValues(absValues==1) = 2;
@@ -63,30 +83,23 @@ if(visualize==1)
     
     subplot(311)
     stem(x)
-    %maxAmpl=max(abs(y));
-    %axis([1 totalFrames*R -abs(maxAmpl) abs(maxAmpl)])
     xlabel('Sample')
     ylabel('Amplitude')
-    title(['Speech Signal'])
+    title('Speech Signal')
     grid on
-    hold on
     
     subplot(312)
     stem(Energy)
-    hold on
-    %axis([1 totalFrames min(energy) max(energy)])
     xlabel('Frame')
     ylabel('Energy')
-    title(['Logarimthmic Energy of Each Frame'])
+    title('Logarimthmic Energy of Each Frame')
     grid on
     
     subplot(313)
     stem(ZeroCrossRate)
-    hold on
-    %axis([1 totalFrames 0 50])
     xlabel('Frame')
     ylabel('Zerocrossing Rate')
-    title(['Zerocrossing Rate of Each Frame'])
+    title('Zerocrossing Rate of Each Frame')
     grid on
 
 end
@@ -145,6 +158,7 @@ if(visualize==1)
     %xline(backgroundFranes, 'b');
     stem(foregroundFrames,Energy(foregroundFrames),'g')
     stem(backgroundFranes,Energy(backgroundFranes),'b')
+    legend('Background Frames','Foreground Frames') 
     grid on
     
     subplot(212)
@@ -153,11 +167,12 @@ if(visualize==1)
     %axis([1 totalFrames 0 50])
     xlabel('Frame')
     ylabel('Zerocrossing Rate')
-    title(['Zerocrossing Rate of Each Frame'])
+    title('Zerocrossing Rate of Each Frame')
 %     xline(foregroundFrames, 'g');
 %     xline(backgroundFranes, 'b');
     stem(foregroundFrames,ZeroCrossRate(foregroundFrames),'g')
     stem(backgroundFranes,ZeroCrossRate(backgroundFranes),'b')
+    legend('Background Frames','Foreground Frames') 
     grid on
 
     backgroundFranes = find(classification == 1);
@@ -171,11 +186,12 @@ if(visualize==1)
     %axis([1 totalFrames min(energy) max(energy)])
     xlabel('Frame')
     ylabel('Energy')
-    title(['Logarimthmic Energy of Each Frame'])
+    title('Logarimthmic Energy of Each Frame')
 %     xline(foregroundFrames, 'g');
 %     xline(backgroundFranes, 'b');
     stem(foregroundFrames,Energy(foregroundFrames),'g')
     stem(backgroundFranes,Energy(backgroundFranes),'b')
+    legend('Background Frames','Foreground Frames') 
     grid on
     
     subplot(212)
@@ -184,11 +200,13 @@ if(visualize==1)
     %axis([1 totalFrames 0 50])
     xlabel('Frame')
     ylabel('Zerocrossing Rate')
-    title(['Zerocrossing Rate of Each Frame'])
+    title('Zerocrossing Rate of Each Frame')
 %     xline(foregroundFrames, 'g');
 %     xline(backgroundFranes, 'b');
     stem(foregroundFrames,ZeroCrossRate(foregroundFrames),'g')
     stem(backgroundFranes,ZeroCrossRate(backgroundFranes),'b')
+    
+    legend('Background Frames','Foreground Frames') 
     grid on
 
 end
@@ -229,7 +247,7 @@ end
 
 if(visualize==1)
     figure('Name', 'Isolated words')
-    stem(x)
+    stem(x,'HandleVisibility','off')
     xlabel('Sample')
     ylabel('Amplitude')
     title('Speech Signal')
@@ -260,7 +278,7 @@ for k=1:length(isolatedWordsIndexes)
     if(visualize==1)
         xline(firstSample, 'g');
         xline(lastSample, 'r');
-        stem(firstSample:lastSample, x(firstSample:lastSample),'r')
+        stem(firstSample:lastSample, x(firstSample:lastSample),'r','HandleVisibility','off')
     end
 
     
@@ -270,6 +288,9 @@ for k=1:length(isolatedWordsIndexes)
 
 end
 
+if(visualize==1)
+   legend('Start of word','End of Word') 
+end
 
 
 
