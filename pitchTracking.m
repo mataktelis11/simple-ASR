@@ -6,6 +6,7 @@ function [fundamentalFreq] = pitchTracking(sig,Fs,visualize,title)
 %   Also it is assumed that fundamental frequency will be in the interval:
 %   [90,600] (Hz).
 %
+%   Args:
 %
 %
 %
@@ -16,9 +17,9 @@ function [fundamentalFreq] = pitchTracking(sig,Fs,visualize,title)
 k1 = floor(Fs/600);
 k2 = floor(Fs/90);
 
-Ru = xcorr(sig,'unbiased');
-Ru = Ru(length(sig) : end);
-g = Ru/Ru(1); % Normalize
+R = xcorr(sig,'unbiased');
+R = R(length(sig) : end);
+g = R/R(1); % Normalize
 
 if(visualize==1)
     figure('Name', title)
