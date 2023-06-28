@@ -18,8 +18,8 @@ close all
 
 
 % load the augmented dataset
-load augmentedDataset\augmentedDatasetV1.mat
-load augmentedDataset\augmentedDatasetLabelsV1.mat
+load augmentedDataset\augmentedDataset.mat
+load augmentedDataset\augmentedDatasetLabels.mat
 
 % define length of feature vectors
 featureLength = 8000;
