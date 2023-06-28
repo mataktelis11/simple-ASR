@@ -1,7 +1,17 @@
 
+%
+% Step 4/4
+%
+
 % SVM evaluation script
 
 % NOTICE: make sure you run 'SVM_training_script' first 
+
+% SUMMARY
+%
+% This script shows some metrics regarding the accuracy of 
+% 'SVMClassifier'. Make sure it is loaded.
+%
 
 % show the confusion matrix of the training set
 figure;

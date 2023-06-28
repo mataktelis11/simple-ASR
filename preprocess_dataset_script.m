@@ -3,8 +3,11 @@ clc
 clear
 close all
 
+%
+% Step 1/4
+%
 
-% PREPROCESSING DATASET SCRIPT
+% Preprocessing Dataset script 
 
 % SUMMARY
 %

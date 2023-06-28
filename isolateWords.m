@@ -17,11 +17,12 @@ function [isolatedWords] = isolateWords(x,Fs,w,h,trainingFrames,IF,visualize)
 %       trainingFrames: number of frames used for the calvulation of mean
 %           and stv of Energy and zerocrossing rate
 %       IF: Constant Zero Crossing Threshold 
-%       visualize: integer (0 or 1)
+%       visualize: integer (0 or 1)% 0 : do not display diagrams
+%                                    1 : display diagrams 
 %
 %   Returns:
 %       isolatedWords: cell array containing the arrays cooresponding to
-%           the words of the input signal.
+%                      the words of the input signal.
 %
 %
 %
@@ -77,33 +78,6 @@ for m=0:numOfFrames-1
 end
 
 
-if(visualize==1)
-
-    figure('Name', 'Short-Term processing')
-    
-    subplot(311)
-    stem(x)
-    xlabel('Sample')
-    ylabel('Amplitude')
-    title('Speech Signal')
-    grid on
-    
-    subplot(312)
-    stem(Energy)
-    xlabel('Frame')
-    ylabel('Energy')
-    title('Logarimthmic Energy of Each Frame')
-    grid on
-    
-    subplot(313)
-    stem(ZeroCrossRate)
-    xlabel('Frame')
-    ylabel('Zerocrossing Rate')
-    title('Zerocrossing Rate of Each Frame')
-    grid on
-
-end
-
             
 eavg=mean(Energy(1:trainingFrames));
 esig=std(Energy(1:trainingFrames));
@@ -139,77 +113,58 @@ classification2(classification2 > 1) = 2;
 
 
 
-
 if(visualize==1)
 
-    backgroundFranes = find(classification == 1);
-    foregroundFrames = find(classification == 2);
-
-    figure('Name', 'Frame Classification before post processing')
-        
-    subplot(211)
-    stem(Energy)
-    hold on
-    %axis([1 totalFrames min(energy) max(energy)])
-    xlabel('Frame')
-    ylabel('Energy')
-    title(['Logarimthmic Energy of Each Frame'])
-    %xline(foregroundFrames, 'g');
-    %xline(backgroundFranes, 'b');
-    stem(foregroundFrames,Energy(foregroundFrames),'g')
-    stem(backgroundFranes,Energy(backgroundFranes),'b')
-    legend('Background Frames','Foreground Frames') 
+    figure('Name', 'Short-Term processing')
+    
+    subplot(311)
+    stem(x)
+    xlabel('Sample')
+    ylabel('Amplitude')
+    title('Speech Signal')
     grid on
     
-    subplot(212)
-    stem(ZeroCrossRate)
-    hold on
-    %axis([1 totalFrames 0 50])
-    xlabel('Frame')
-    ylabel('Zerocrossing Rate')
-    title('Zerocrossing Rate of Each Frame')
-%     xline(foregroundFrames, 'g');
-%     xline(backgroundFranes, 'b');
-    stem(foregroundFrames,ZeroCrossRate(foregroundFrames),'g')
-    stem(backgroundFranes,ZeroCrossRate(backgroundFranes),'b')
-    legend('Background Frames','Foreground Frames') 
-    grid on
-
-    backgroundFranes = find(classification == 1);
+    
+    backgroundFranes = find(classification2 == 1);
     foregroundFrames = find(classification2 == 2);
-
-    figure('Name', 'Frame Classification after post processing')
-        
-    subplot(211)
+    
+    
+    subplot(312)
     stem(Energy)
     hold on
-    %axis([1 totalFrames min(energy) max(energy)])
     xlabel('Frame')
     ylabel('Energy')
     title('Logarimthmic Energy of Each Frame')
-%     xline(foregroundFrames, 'g');
-%     xline(backgroundFranes, 'b');
     stem(foregroundFrames,Energy(foregroundFrames),'g')
     stem(backgroundFranes,Energy(backgroundFranes),'b')
     legend('Background Frames','Foreground Frames') 
+    hold off
     grid on
     
-    subplot(212)
+    subplot(313)
     stem(ZeroCrossRate)
     hold on
-    %axis([1 totalFrames 0 50])
     xlabel('Frame')
     ylabel('Zerocrossing Rate')
     title('Zerocrossing Rate of Each Frame')
-%     xline(foregroundFrames, 'g');
-%     xline(backgroundFranes, 'b');
     stem(foregroundFrames,ZeroCrossRate(foregroundFrames),'g')
-    stem(backgroundFranes,ZeroCrossRate(backgroundFranes),'b')
-    
+    stem(backgroundFranes,ZeroCrossRate(backgroundFranes),'b')   
     legend('Background Frames','Foreground Frames') 
+    hold off
     grid on
 
+    
+    figure('Name', 'Post-processing')
+    subplot(211)
+    stem(classification)
+    title('Initial Classification')
+    subplot(212)
+    stem(classification2)
+    title('Final Classification')
+    
 end
+
+
 
 
 
@@ -247,7 +202,7 @@ end
 
 if(visualize==1)
     figure('Name', 'Isolated words')
-    stem(x,'HandleVisibility','off')
+    stem(x)
     xlabel('Sample')
     ylabel('Amplitude')
     title('Speech Signal')
@@ -276,9 +231,9 @@ for k=1:length(isolatedWordsIndexes)
     end
     
     if(visualize==1)
-        xline(firstSample, 'g');
+        xline(firstSample,'Color', [0.4660 0.6740 0.1880]);
         xline(lastSample, 'r');
-        stem(firstSample:lastSample, x(firstSample:lastSample),'r','HandleVisibility','off')
+        stem(firstSample:lastSample, x(firstSample:lastSample),'m')
     end
 
     
@@ -289,7 +244,7 @@ for k=1:length(isolatedWordsIndexes)
 end
 
 if(visualize==1)
-   legend('Start of word','End of Word') 
+   legend('Background','Start of word','End of Word','Foreground') 
 end
 
 

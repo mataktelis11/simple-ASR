@@ -1,4 +1,4 @@
-function [fundamentalFreq] = pitchTracking(sig,Fs,visualize,title)
+function [fundamentalFreq] = pitchTracking(sig,Fs,visualize)
 %PITCHTRACKING Calcuclate the fundamental frequency (pitch) in a speech
 %signal
 %   This function calculates the fundamental frequency (pitch) in an input
@@ -7,10 +7,13 @@ function [fundamentalFreq] = pitchTracking(sig,Fs,visualize,title)
 %   [90,600] (Hz).
 %
 %   Args:
+%       sig:        audio speech signal
+%       Fs:         sampling frequency of the signal
+%       visualize:  0 : do not display autocorrelation diagram
+%                   1 : display autocorrelation diagram
 %
-%
-%
-%
+%   Returns:
+%       fundamentalFreq: the fundamental frequency in Hz
 %
 %
 
@@ -22,11 +25,11 @@ R = R(length(sig) : end);
 g = R/R(1); % Normalize
 
 if(visualize==1)
-    figure('Name', title)
     plot(g)
     hold on
     plot(k1+1:k2+1, g(k1+1:k2+1),'r*')
     hold off
+    legend('g','[90,600] Hz')
 end
 
 [~,index] = max(g(k1+1:k2+1));

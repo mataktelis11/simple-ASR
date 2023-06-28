@@ -1,11 +1,27 @@
 
+%
+% Step 3/4
+%
+
 % SVM training script
 
 % NOTICE: make sure you run 'feature_extraction_script' first 
+%         in order to have the cell array with the feature vectors
 
-load augmentedDataset\augmentedDatasetLabelsV1.mat
+% SUMMARY
+% 
+% This script reads the saved feature Vectors from an existing cell
+% array and separates them into a training set and a testing set, in order
+% to train an SVM.
+%
+% Before the training starts, the script shows a figure containing
+% 16 random spectrograms from the dataset.
+%
+% Important: before the training starts, the command 'pause' is called.
+%            Press any key to start the training and keep in mind it will
+%            take some time.
 
-X = cell2mat(vectors');
+X = cell2mat(featureVectors');
 Y = labels;
 
 % split the dataset to training and testing
@@ -18,7 +34,8 @@ Y_test = Y(test(cv));
 
 % Enable parallel computation.
 options = statset('UseParallel',true);
-                      
+
+% pause before starting the training
 pause
                    
 % train SVM Classifier.
