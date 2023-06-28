@@ -1,6 +1,5 @@
 function [xnew] = srcLowPassFilter(x, FsOrig, Fs)
 %RESAMPLENONINTEGER Performs Sample Rate Conversion for 1D input signal x
-%   Detailed explanation goes here
 %
 %
 %   Theory based on:  Discrete-time signal processing (2nd edition), Oppenheim, Schafer

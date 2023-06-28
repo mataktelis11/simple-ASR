@@ -1,6 +1,5 @@
 function [xnew] = srcInterpolation(x, FsOrig, Fs)
-%SRCINTERPOLATION Summary of this function goes here
-%   Detailed explanation goes here
+%SRCINTERPOLATION Performs Sample Rate Conversion for 1D input signal x
 
 resampleRatio = Fs / FsOrig;
 

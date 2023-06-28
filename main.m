@@ -45,7 +45,7 @@ close all
 
 %%%% USER DEFINED PARAMETERS %%%%
 
-audioFilename = 'samples/3rec.wav';
+audioFilename = 'samples/3rec.waV';
 
 visualize = 1;  % 0 : do not display diagrams
                 % 1 : display diagrams (slower)

@@ -34,7 +34,7 @@ end
 
 [~,index] = max(g(k1+1:k2+1));
 
-index = index-1 + k1;
+index = index + k1;
 
 fundamentalFreq = Fs/index;
 
