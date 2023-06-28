@@ -88,16 +88,18 @@ for i=1:length(folders)
         audioname = strcat('audioData2/',folders{i},'/',audifiles{file});
  
         % load speech file
-        [speech,FsOrig]=audioread(audioname);
+        [speech,FsOrig] = audioread(audioname);
 
         % normalize the original signal
         % so the values are in the interval [0, 1]
-        speechMin=min(speech);
-        speechMax=max(speech);
+        speechMin = min(speech);
+        speechMax = max(speech);
         speech=speech/max(speechMax,-speechMin);
 
         % resample the signal
-        x=resample(speech,Fs,FsOrig);
+        x = resample(speech,Fs,FsOrig);
+        % alternative function
+        %x = srcInterpolation(speech, FsOrig, Fs);
 
         % filter the resampled signal with a FIR bandpass filter
         x=filter(filt,1,x);

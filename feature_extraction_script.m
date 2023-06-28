@@ -32,7 +32,7 @@ signalIndexes = randperm(length(signals),displaySpecNumber);
 
 displayDimension = sqrt(displaySpecNumber);
 
-figure('Name','Training Images Sample');
+figure('Name','Training Spectrograms Sample');
 
 for i=1:displaySpecNumber
     subplot(displayDimension,displayDimension,i);
@@ -41,6 +41,7 @@ for i=1:displaySpecNumber
     title( strcat(num2str(index),'/',labels(index)))
 end
 
+
 % save all feature vectors in a cell array
 
 featureVectors = {};
@@ -48,15 +49,7 @@ featureVectors = {};
 sig = zeros(1,featureLength);
 
 for k=1:length(signals)
-    
-%    sig = [signals{k} zeros(1,8000- length(signals{k}))];
-%    
-%    coeffs = spectrogram(sig,100,80,100,8000,'yaxis');
-%    coeffs = abs(coeffs);
-%    coeffs = reshape(coeffs.',1,[]);
-%    size(coeffs);
-   
-   featureVectors{end+1} = extractFeatures(signals{k}, 8000, 1);
+   featureVectors{end+1} = extractFeatures(signals{k}, 8000, 0);
 end
 
 

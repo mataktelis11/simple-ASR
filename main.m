@@ -93,7 +93,9 @@ speechMax=max(speech);
 speech=speech/max(speechMax,-speechMin);
 
 % resample the signal
-x=resample(speech,Fs,FsOrig);
+x = resample(speech,Fs,FsOrig);
+% alternative function
+%x = srcInterpolation(speech, FsOrig, Fs);
 
 % filter the resampled signal with a FIR bandpass filter
 filt = firpm(order, F, Ws);
