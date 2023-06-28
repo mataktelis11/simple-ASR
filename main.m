@@ -45,7 +45,7 @@ close all
 
 %%%% USER DEFINED PARAMETERS %%%%
 
-audioFilename = 'samples/ZA.waV';
+audioFilename = 'samples/3rec.wav';
 
 visualize = 1;  % 0 : do not display diagrams
                 % 1 : display diagrams (slower)
@@ -102,6 +102,16 @@ x = resample(speech,Fs,FsOrig);
 filt = firpm(order, F, Ws);
 if(useFIRfilter==1)
     x=filter(filt,1,x);
+end
+
+% plot frequency response of filter
+if(visualize==1)
+   NF = 512; % number of frequencies
+   [Hs, Ws] = freqz(filt,1,NF);
+   figure('Name','Frequency response of FIR filter');
+   plot(Ws/pi, 20*log10(abs(Hs)))
+   ylabel('dB')
+   title('Highpass filter frequency response')
 end
 
 % find words inside the signal
