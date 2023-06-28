@@ -44,7 +44,7 @@ SVMClassifier = fitcecoc(X_train, Y_train,'Options',options);
 % store only usefull parts for later usage                   
 SVMClassifierCompact = SVMClassifier.compact;
 
-save('svmClassifierV1', 'SVMClassifierCompact');
+save('trainedModelsCompact\svmClassifierV1', 'SVMClassifierCompact');
 
 
 

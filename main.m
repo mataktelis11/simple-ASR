@@ -18,7 +18,8 @@
 %       svmClassifierV0: detects words {'zero', 'one', 'two', 'three', 
 %                                       'four', 'five'}
 %
-%
+%       svmClassifierV1: detects words {'zero', 'one', 'two', 'three', 
+%                                       'four', 'five', 'nine'}
 %
 %
 % There are also some audio samples for testing in the folder 'samples'.
@@ -44,7 +45,7 @@ close all
 
 %%%% USER DEFINED PARAMETERS %%%%
 
-audioFilename = 'samples/3rec.wav';
+audioFilename = 'samples/ZA.waV';
 
 visualize = 1;  % 0 : do not display diagrams
                 % 1 : display diagrams (slower)
@@ -56,8 +57,8 @@ useFIRfilter = 1;  % 0 : do not use FIR filter
                    % 1 : use FIR filter
 
 % choose trained SVM
-load trainedModelsCompact\svmClassifierV0.mat;
-%load trainedModelsCompact\svmClassifierV1.mat;
+%load trainedModelsCompact\svmClassifierV0.mat;
+load trainedModelsCompact\svmClassifierV1.mat;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
