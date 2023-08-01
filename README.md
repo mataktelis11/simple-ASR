@@ -3,6 +3,16 @@ As the title suggests this a simple ASR system, made to detect english words fro
 
 This project was made for a university assigment during the summer of 2023.
 
+**Table of contents**
+- [Example](#example)
+- [Enviroment](#enviroment)
+- [Details](#details)
+  - [Graphs/Screenshots](#graphsscreenshots)
+  - [How to train your own model](#how-to-train-your-own-model)
+- [Sources](#sources)
+  - [Digital sources:](#digital-sources)
+  - [Books used:](#books-used)
+
 ## Example
 Run **main.m** script (use availabe mp3/wav files in folder **samples**)
 
@@ -92,7 +102,41 @@ Usefull files:
 Auxiliary files:
 - interpolation_examle.m
 - src_demo_script.m
-	
+
+
+## How to train your own model
+First clone this repo
+```
+git clone https://github.com/mataktelis11/simple-ASR.git
+```
+now you need a dataset. I suggest [AudioMNIST](https://github.com/soerenab/AudioMNIST) which is the one i used for the included models. This dataset has 30000 audio samples of spoken digits (0-9) of 60 different speakers.
+```
+git clone https://github.com/soerenab/AudioMNIST.git
+```
+Now go into the root folder of the current project and create and empty dir
+```
+cd simple-ASR
+mkdir audioData2
+```
+The dataset is divided in folders based on the speakers and not the words. For our model we want the **audioData2** folder to contain subfolders each with all the audio files that correspond to a specific word. This can be done easily with bash commands.
+```bash
+cp ../AudioMNIST/data/??/0*.wav audioData2/zero
+cp ../AudioMNIST/data/??/1*.wav audioData2/one
+cp ../AudioMNIST/data/??/2*.wav audioData2/two
+cp ../AudioMNIST/data/??/3*.wav audioData2/three
+cp ../AudioMNIST/data/??/4*.wav audioData2/four
+cp ../AudioMNIST/data/??/5*.wav audioData2/five
+cp ../AudioMNIST/data/??/9*.wav audioData2/nine
+```
+You can add more words and more audio files if you want. Now in order to train the model you need to run the following scripts in this order:
+
+1. preprocess_dataset_script.m
+2. feature_extraction_script.m
+3. SVM_training_script.m
+4. SVM_evaluation_script.m
+
+
+ 
 # Sources
 
 ## Digital sources:
