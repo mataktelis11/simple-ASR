@@ -65,7 +65,7 @@ More specifically, the following steps are implemented:
 4. For each word we calculate the fundamental frequency (pitch) with autocorrelation
 5. Finally the program automatically recognizes which words are in the signal with a trained SVM model (two pretrained models are provided)
 
-A detailed technical documentation is also provided in Greek.
+A detailed technical documentation is also provided in Greek. Read it [here](https://github.com/mataktelis11/simple-ASR/tree/main/pdfs/audio_n_speech_processing_doc.pdf).
 
 ## Graphs/Screenshots
 Below are some graphs the program creates.
