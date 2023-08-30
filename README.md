@@ -10,8 +10,8 @@ This project was made for a university assigment during the summer of 2023.
   - [Graphs/Screenshots](#graphsscreenshots)
   - [How to train your own model](#how-to-train-your-own-model)
 - [Sources](#sources)
-  - [Digital sources:](#digital-sources)
-  - [Books used:](#books-used)
+  - [Digital sources](#digital-sources)
+  - [Books used](#books-used)
 
 ## Example
 Run **main.m** script (use availabe mp3/wav files in folder **samples**)
