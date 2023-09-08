@@ -144,6 +144,8 @@ You can add more words and more audio files if you want. Now in order to train t
 - Dataset used for the training of the SVM models: [AudioMNIST](https://github.com/soerenab/AudioMNIST)
 - .wav sample files from Professor Lawrence Rabiner's [website](https://web.ece.ucsb.edu/Faculty/Rabiner/ece259) and some recoreded from me
 - https://www.mathworks.com/help/signal/ref/resample.html
+- https://www.mathworks.com/help/stats/confusionchart.html
+- https://www.mathworks.com/help/stats/improving-classification-trees-and-regression-trees.html
 
 ## Books used:
 
