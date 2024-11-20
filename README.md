@@ -5,7 +5,7 @@ This project was made for a university assigment during the summer of 2023.
 
 **Table of contents**
 - [Enviroment](#enviroment)
-- [Example](#example)
+- [Example](#example-usage)
 - [Details](#details)
   - [Graphs/Screenshots](#graphsscreenshots)
   - [How to train your own model](#how-to-train-your-own-model)
@@ -25,7 +25,7 @@ Below is an example recording (from me)
 
 https://github.com/mataktelis11/simple-ASR/assets/61196956/77d5cd32-3f91-43f6-b7ec-6cfb3e104209
 
-The script **main.m** recognizes the words i spoke in this recording. We have the following output (pitch is in Hz):
+The script ```main.m``` recognizes the words i spoke in this recording. We have the following output (pitch is in Hz):
 ```
 Detected word#1: pitch = 109.589041, class = one
 Detected word#2: pitch = 106.666667, class = two
@@ -33,7 +33,7 @@ Detected word#3: pitch = 108.108108, class = three
 Detected word#4: pitch = 400.000000, class = four
 ```
 
-Alternatively, use the function **numbersASR**:
+Alternatively, use the function ```numbersASR```:
 
 Example 1 (recognize words in a wav file):
 ```matlab
@@ -76,11 +76,11 @@ This is the highpass FIR filter's impulse response
 
 <img src='https://github.com/mataktelis11/simple-ASR/assets/61196956/2956c37f-680d-4778-8d7e-dbe8ba979f66' height=200px>
 
-bellow is the isolation of the words in the .wav file
+Bellow is the isolation of the words in the ```3rec.wav``` file
 
 <img src='https://github.com/mataktelis11/simple-ASR/assets/61196956/84cbe8c6-5c89-4318-be1e-7275e09dfdcb' height=400px>
 
-finally we have the spectrogram and autocorrelation of each recognized word
+Finally we have the spectrogram and autocorrelation of each recognized word
 
 <img src='https://github.com/mataktelis11/simple-ASR/assets/61196956/9a9c7980-4885-467c-bb6f-fa741bb72668' height=250px>
 <img src='https://github.com/mataktelis11/simple-ASR/assets/61196956/a925eca5-eb53-4059-8eeb-3210d81ba806' height=250px>
@@ -144,7 +144,10 @@ You can add more words and more audio files if you want. Now in order to train t
 - The model was tested with 7 classes. Not all words from "zero" to "nine" were used in the training. The reason being the sounds in words "six" and "seven" are not recognised well in the isolation step and would lead to inconsistent results.
 
 - Below are the confusion matrixes of a trained SVM.
- 
+  <img src='https://github.com/user-attachments/assets/f765b950-09f8-439c-a689-4a47c3c6c9f0' height=500px>
+  
+  <img src='https://github.com/user-attachments/assets/75dce4de-eb61-4f4a-bf7e-6531a7edc08b' height=500px>
+
 # Sources
 
 ## Digital sources:
