@@ -4,17 +4,22 @@ As the title suggests this a simple ASR system, made to detect english words fro
 This project was made for a university assigment during the summer of 2023.
 
 **Table of contents**
-- [Example](#example)
 - [Enviroment](#enviroment)
+- [Example](#example)
 - [Details](#details)
   - [Graphs/Screenshots](#graphsscreenshots)
   - [How to train your own model](#how-to-train-your-own-model)
+  - [Notes](#notes)
 - [Sources](#sources)
   - [Digital sources](#digital-sources)
   - [Books used](#books-used)
 
-## Example
-Run **main.m** script (use availabe mp3/wav files in folder **samples**)
+
+# Enviroment
+The project was developped and tested in **Matlab version R2020b**. It will not work in GNU Octave as it uses Matlab's fitcecoc function.
+
+## Example usage
+Run ```main.m``` script (use availabe mp3/wav files in folder ```samples/```)
 
 Below is an example recording (from me)
 
@@ -52,9 +57,6 @@ load trainedModelsCompact\svmClassifierV0.mat;
 
 [Y,pitch] = numbersASR(speech,44100,SVMClassifierCompact,0)
 ```
-
-# Enviroment
-The project was developped in Matlab version R2020b. It will not work in GNU Octave as it uses Matlab's fitcecoc function.
 
 # Details
 More specifically, the following steps are implemented:
@@ -109,7 +111,7 @@ First clone this repo
 ```
 git clone https://github.com/mataktelis11/simple-ASR.git
 ```
-now you need a dataset. I suggest [AudioMNIST](https://github.com/soerenab/AudioMNIST) which is the one i used for the included models. This dataset has 30000 audio samples of spoken digits (0-9) of 60 different speakers.
+Now you need a dataset. I suggest [AudioMNIST](https://github.com/soerenab/AudioMNIST) which is the one i used for the included models. This dataset has 30000 audio samples of spoken digits (0-9) of 60 different speakers.
 ```
 git clone https://github.com/soerenab/AudioMNIST.git
 ```
@@ -126,23 +128,29 @@ cp ../AudioMNIST/data/??/2*.wav audioData2/two
 cp ../AudioMNIST/data/??/3*.wav audioData2/three
 cp ../AudioMNIST/data/??/4*.wav audioData2/four
 cp ../AudioMNIST/data/??/5*.wav audioData2/five
+cp ../AudioMNIST/data/??/6*.wav audioData2/six
+cp ../AudioMNIST/data/??/7*.wav audioData2/seven
+cp ../AudioMNIST/data/??/8*.wav audioData2/eight
 cp ../AudioMNIST/data/??/9*.wav audioData2/nine
 ```
 You can add more words and more audio files if you want. Now in order to train the model you need to run the following scripts in this order:
 
-1. preprocess_dataset_script.m
-2. feature_extraction_script.m
-3. SVM_training_script.m
-4. SVM_evaluation_script.m
+1. ```preprocess_dataset_script.m```
+2. ```feature_extraction_script.m```
+3. ```SVM_training_script.m```
+4. ```SVM_evaluation_script.m```
 
+## Notes
+- The model was tested with 7 classes. Not all words from "zero" to "nine" were used in the training. The reason being the sounds in words "six" and "seven" are not recognised well in the isolation step and would lead to inconsistent results.
 
+- Below are the confusion matrixes of a trained SVM.
  
 # Sources
 
 ## Digital sources:
 
 - Dataset used for the training of the SVM models: [AudioMNIST](https://github.com/soerenab/AudioMNIST)
-- .wav sample files from Professor Lawrence Rabiner's [website](https://web.ece.ucsb.edu/Faculty/Rabiner/ece259) and some recoreded from me
+-   ~~.wav sample files from Professor Lawrence Rabiner's [website](https://web.ece.ucsb.edu/Faculty/Rabiner/ece259)~~ removed to avoid copyrights - I did not own those wav files.
 - https://www.mathworks.com/help/signal/ref/resample.html
 - https://www.mathworks.com/help/stats/confusionchart.html
 - https://www.mathworks.com/help/stats/improving-classification-trees-and-regression-trees.html
